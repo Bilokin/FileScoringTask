@@ -13,10 +13,12 @@ class TestFileReader(unittest.TestCase):
     def test_Read(self):
         counter = 0
         # TODO: relative path is not optimal...
-        with FileReader('tests/examples/lorem.txt') as fileReader:
+        fileNames = ['tests/examples/lorem.txt',
+                'tests/examples/lorem-eng.txt']
+        with FileReader(fileNames) as fileReader:
             for line in fileReader.Read():
                 counter += 1
-        self.assertEqual(counter, 102)
+        self.assertEqual(counter, 105)
 
 if __name__ == '__main__':
     unittest.main()

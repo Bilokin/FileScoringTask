@@ -16,16 +16,45 @@ class TestAnalysisOperator(unittest.TestCase):
         fileNames = ['tests/examples/lorem.txt',
                 'tests/examples/lorem-eng.txt']
         analysisOperator = AnalysisOperator({"AnalysisOperator":{}})
+        df = None
         with FileReader(fileNames) as fileReader:
-            analysisOperator.ProduceDataframe(fileReader.Read())
-        self.assertEqual(analysisOperator.Dataframe.loc['et']['Counts'],37)
-        self.assertEqual(analysisOperator.Dataframe.loc['in']['Counts'],26)
-        self.assertEqual(analysisOperator.Dataframe.loc['ut']['Counts'],13)
-        self.assertEqual(analysisOperator.Dataframe.loc['the']['Counts'],12)
-        self.assertEqual(analysisOperator.Dataframe.loc['est']['Counts'],10)
-        self.assertEqual(analysisOperator.Dataframe.loc['ad']['Counts'],10)
-        self.assertEqual(analysisOperator.Dataframe.loc['enim']['Counts'],9)
+            df = analysisOperator.ProduceDataframe(fileReader.Read())
+        self.assertEqual(df.loc['et']['Counts'],37)
+        self.assertEqual(df.loc['in']['Counts'],26)
+        self.assertEqual(df.loc['ut']['Counts'],13)
+        self.assertEqual(df.loc['the']['Counts'],12)
+        self.assertEqual(df.loc['est']['Counts'],10)
+        self.assertEqual(df.loc['ad']['Counts'],10)
+        self.assertEqual(df.loc['enim']['Counts'],9)
+
+    def test_AnalyseFile(self) :
+        fileNames = ['tests/examples/lorem.txt',
+                    'tests/examples/lorem-eng.txt']
+        analysisOperator = AnalysisOperator({"AnalysisOperator":{}})
+        for fileName in fileNames:
+            with FileReader(fileName) as fileReader:
+                analysisOperator.AnalyseFile(fileReader.Read(), fileName)
+        self.assertEqual(len(analysisOperator.DataframeDict),2)
+
+    def test_GetMergedData(self) :
+        fileNames = ['tests/examples/lorem.txt',
+                    'tests/examples/lorem-eng.txt']
+        analysisOperator = AnalysisOperator({"AnalysisOperator":{}})
+        for fileName in fileNames:
+            with FileReader(fileName) as fileReader:
+                analysisOperator.AnalyseFile(fileReader.Read(), fileName)
+        #print(analysisOperator.DataframeDict)
+        df = analysisOperator.GetMergedData()
+        self.assertEqual(df.loc['et']['Counts'],37)
+        self.assertEqual(df.loc['in']['Counts'],26)
+        self.assertEqual(df.loc['ut']['Counts'],13)
+        self.assertEqual(df.loc['the']['Counts'],12)
+        self.assertEqual(df.loc['est']['Counts'],10)
+        self.assertEqual(df.loc['ad']['Counts'],10)
+        self.assertEqual(df.loc['enim']['Counts'],9)
+
         
+
 
 if __name__ == '__main__':
     unittest.main()

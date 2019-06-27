@@ -16,8 +16,8 @@ class AnalysisOperator():
         self.Config = dict(config[self.OperatorName])
         #: Column name
         self.ColName = 'Counts'
-        #: A dataframe to analyse 
-        self.Dataframe = pd.DataFrame(columns=[self.ColName])
+        #: Dict filename: DataFrame
+        self.DataframeDict = {}
         self.Introduce()
 
     def ProduceDataframe(self, generator):
@@ -30,10 +30,24 @@ class AnalysisOperator():
                     general_dict[word] += 1
                 else:
                     general_dict[word] = 1
-        self.Dataframe = pd.DataFrame.from_dict(general_dict, 
+        df = pd.DataFrame.from_dict(general_dict, 
                 orient='index', columns = [self.ColName])
-        self.Dataframe = self.Dataframe.sort_values(by=[self.ColName], 
+        df = df.sort_values(by=[self.ColName], 
                 ascending = False)
+        return df
+
+    def AnalyseFile(self, generator, fileName):
+        """ Produces a dataframe and integrates it into a common one """
+        self.DataframeDict[fileName] = self.ProduceDataframe(generator)
+
+    def GetMergedData(self):
+        """ Returns a merged dataframe sorted by counts """
+        df = pd.DataFrame(columns = [self.ColName])
+        for value in self.DataframeDict.values():
+            df = df.add(value, fill_value = 0)
+        df = df.sort_values(by=[self.ColName],
+            ascending = False)
+        return df
 
     def Log(self, string):
         """ Log method, prints a preformatted message. """

@@ -24,7 +24,7 @@ class TestFileReader(unittest.TestCase):
         """ Checks the performance """
         # TODO: do the actual check of performance
         counter = 0
-        fileNames = ['tests/examples/RecoDecays.out']
+        fileNames = 'tests/examples/RecoDecays.out'
         with FileReader(fileNames) as fileReader:
             for line in fileReader.Read():
                 counter += 1

@@ -14,13 +14,22 @@ class PlotOperator():
         self.Config = dict(config[self.OperatorName])
         self.Introduce()
 
-    def Plot(self, dataframe):
+    def Plot(self, df):
         """ Plots a dataframe """
-        if (len(dataframe) < 1):
+        if (len(df) < 1):
             # TODO: print a meaningful message
             return
-        dataframe.plot.barh()
-        plt.tight_layout()
+        if isinstance(df, dict):
+            for key in df.keys():
+                if (len(df[key]) < 1):
+                    continue
+                # TODO: Make a pretty single plot
+                ax = df[key].head(self.Config['NEntries']).plot.barh()
+                ax.set_title(key)
+                plt.tight_layout()
+        else:
+            df.head(self.Config['NEntries']).plot.barh()
+            plt.tight_layout()
         plt.show()
 
     def Log(self, string):

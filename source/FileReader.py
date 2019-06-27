@@ -15,6 +15,8 @@ class FileReader():
         self.Files = []
         #: List of file names, strings
         self.FileNames = fileNames
+        if isinstance(fileNames, str):
+            self.FileNames = [fileNames]
 
     def __enter__(self):
         """ Method to enter with statement, opens files """

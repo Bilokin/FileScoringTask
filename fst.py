@@ -29,25 +29,36 @@ def GetFileNames(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--filename",  help="Path to file for the analysis", action="store")
-    parser.add_argument("-d", "--directoryname",  help="Path to directory for the analysis", action="store")
-    parser.add_argument("-p", "--plot",  help="Plot the histogram", action="store_true")
+    parser.add_argument("-f", "--filename",  
+            help="Path to file for the analysis", action="store")
+    parser.add_argument("-d", "--directoryname",  
+            help="Path to directory for the analysis", action="store")
+    parser.add_argument("-p", "--plot",  
+            help="Plot the histogram", action="store_true")
+    parser.add_argument("-t", "--together",  
+            help="Do not separate results by files", action="store_true")
     args = parser.parse_args()
     # TODO: move config to a separate file
     config = {'AnalysisOperator':{}, 
-              'TextUIOperator':{},
-              'PlotOperator':{}}
+            'TextUIOperator':{'NEntries':10},
+            'PlotOperator':{'NEntries':10}}
     # Load main operators
     uiOperator = TextUIOperator(config)
     analysisOperator = AnalysisOperator(config)
     fileNames = GetFileNames(args)
     # Read files
-    with FileReader(fileNames) as fileReader:
-        analysisOperator.ProduceDataframe(fileReader.Read())
+    df = None
+    for fileName in fileNames:
+        with FileReader(fileName) as fileReader:
+            analysisOperator.AnalyseFile(fileReader.Read(), fileName)
+    if(args.together):
+        df = analysisOperator.GetMergedData()
+    else:
+        df = analysisOperator.DataframeDict
     uiOperator.Say('Printing out the 10 most frequent words:')
-    uiOperator.Say(analysisOperator.Dataframe.head(10))
+    uiOperator.PrintData(df)
     # Make a plot on user request only
     if (args.plot):
         plotOperator = PlotOperator(config)
-        plotOperator.Plot(analysisOperator.Dataframe.head(10))
+        plotOperator.Plot(df)
 

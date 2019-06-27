@@ -1,5 +1,5 @@
 config = {
     'AnalysisOperator':{}, 
-    'TextUIOperator':{'NEntries':10},
+    'TextUIOperator':{'NEntries':999990},
     'PlotOperator':{'NEntries':10}
     }

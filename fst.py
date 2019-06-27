@@ -52,7 +52,7 @@ if __name__ == "__main__":
         df = analysisOperator.GetMergedData()
     else:
         df = analysisOperator.DataframeDict
-    uiOperator.Say('Printing out the 10 most frequent words:')
+    uiOperator.Say('Printing out the most frequently used words:')
     uiOperator.PrintData(df)
     # Make a plot on user request only
     if (args.plot):

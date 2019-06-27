@@ -15,14 +15,19 @@ class TextUIOperator():
     def Say(self, message):
         """ Prints a message to user """
         print(message)
+
     def PrintData(self, df):
         """ Prints data in a desired format """
         if isinstance(df, dict):
             for key in df.keys():
                 print('File: %s'%key)
-                print(df[key].head(self.Config['NEntries']))
+                if (len(df[key]) < 1):
+                    print('\tEmpty, not a text file or a directory.')
+                else:
+                    print(df[key].head(self.Config['NEntries']))
         else:
             print(df.head(self.Config['NEntries']))
+
     def Log(self, string):
         """ Log method, prints a preformatted message. """
         if self.enableLogging:

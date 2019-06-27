@@ -37,7 +37,7 @@ class AnalysisOperator():
         return df
 
     def AnalyseFile(self, generator, fileName):
-        """ Produces a dataframe and integrates it into a common one """
+        """ Produces a dataframe and integrates it into a common dict """
         self.DataframeDict[fileName] = self.ProduceDataframe(generator)
 
     def GetMergedData(self):

@@ -11,10 +11,10 @@ class FileReader():
         """ 
         Constructor method 
         Args:
-            config(dict): Configuration dictionary, 
+            config (dict): Configuration dictionary, 
                 it has to contain a key named after
                 this operator
-            log(bool): switch to disable logs
+            log (bool): switch to disable logs
         Returns: 
         """
         #: bool to enable logs
@@ -29,7 +29,11 @@ class FileReader():
             self.FileNames = [fileNames]
 
     def __enter__(self):
-        """ Method to enter with statement, opens files """
+        """ 
+        Method to enter with statement, opens files 
+        Returns:
+            self
+        """
         for fileName in self.FileNames:
             if os.path.isfile(fileName):
                 self.Log('Opening a file %s'%fileName)
@@ -68,7 +72,7 @@ class FileReader():
         """ 
         Log method, prints a preformatted message. 
         Args:
-            string(str): String to print
+            string (str): String to print
         """
         if self.enableLogging:
             print(self.OperatorName+": "+string)

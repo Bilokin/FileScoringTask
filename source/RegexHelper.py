@@ -8,7 +8,7 @@ def GetWords(phrase):
     Args:
         phrase (str): String to parse
     Returns: 
-        (list) list of words
+        filteredList (list): list of words
     """
     regex = r'\w+'
     listToFilter = re.findall(regex,phrase.lower())

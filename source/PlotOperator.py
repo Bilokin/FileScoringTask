@@ -10,7 +10,7 @@ class PlotOperator():
         """ 
         Constructor method 
         Args:
-            configi (dict): Configuration dictionary, 
+            config (dict): Configuration dictionary, 
                 it has to contain a key named after
                 this operator
             log (bool): switch to disable logs

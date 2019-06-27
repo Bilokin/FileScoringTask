@@ -18,7 +18,7 @@ def GetFileNames(args):
     Args:
         args (obj): Arguments of argparse 
     Returns: 
-        (bool) list of the filenames
+        fileNames (list): list of the filenames
     """
     if (args.filename):
         return [args.filename]

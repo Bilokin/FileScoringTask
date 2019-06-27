@@ -12,10 +12,10 @@ class AnalysisOperator():
         """ 
         Constructor method 
         Args:
-            config(dict): Configuration dictionary, 
+            config (dict): Configuration dictionary, 
                 it has to contain a key named after
                 this operator
-            log(bool): switch to disable logs
+            log (bool): switch to disable logs
         Returns: 
         """
         #: bool to enable logs
@@ -34,9 +34,9 @@ class AnalysisOperator():
         """ 
         Produces a dataframe object from the generator 
         Args:
-            generator(obj): Iterative object of strings
+            generator (obj): Iterative object of strings
         Returns:
-            df(pandas.DataFrame): Sorted DataFrame of counts
+            df (pandas.DataFrame): Sorted DataFrame of counts
         """
         general_dict = {}
         for line in generator:
@@ -67,7 +67,7 @@ class AnalysisOperator():
         Returns a merged dataframe sorted by counts 
         Args:
         Returns:
-            df(pandas.DataFrame): Sorted DataFrame of counts
+            df (pandas.DataFrame): Sorted DataFrame of counts
         """
         df = pd.DataFrame(columns = [self.ColName])
         for value in self.DataframeDict.values():
@@ -80,7 +80,7 @@ class AnalysisOperator():
         """ 
         Log method, prints a preformatted message. 
         Args:
-            string(str): String to print
+            string (str): String to print
         """
         if self.enableLogging:
             print(self.OperatorName+": "+string)

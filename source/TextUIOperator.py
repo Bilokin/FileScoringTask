@@ -18,6 +18,7 @@ class TextUIOperator():
 
     def PrintData(self, df):
         """ Prints data in a desired format """
+        self.Say('Printing out the most frequently used words:')
         if isinstance(df, dict):
             for key in df.keys():
                 print('File: %s'%key)

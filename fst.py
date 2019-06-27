@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import os
 import sys
+
 import argparse
 import glob
 
@@ -26,9 +28,9 @@ def GetFileNames(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-f", "--filename",  help="File to analyse", action="store")
-    parser.add_argument("-d", "--directoryname",  help="Directory to analyse", action="store")
-    parser.add_argument("-p", "--plot",  help="Plot the hist", action="store_true")
+    parser.add_argument("-f", "--filename",  help="Path to file for the analysis", action="store")
+    parser.add_argument("-d", "--directoryname",  help="Path to directory for the analysis", action="store")
+    parser.add_argument("-p", "--plot",  help="Plot the histogram", action="store_true")
     args = parser.parse_args()
     # TODO: move config to a separate file
     config = {'AnalysisOperator':{}, 

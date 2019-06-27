@@ -10,7 +10,7 @@ class FileReader():
         #: bool to enable logs
         self.enableLogging = log
         #: name of the class 
-        self.OperatorName = "FileReader"
+        self.OperatorName = 'FileReader'
         #: List of file objects
         self.Files = []
         #: List of file names, strings
@@ -21,7 +21,7 @@ class FileReader():
         for fileName in self.FileNames:
             if os.path.isfile(fileName):
                 self.Log('Opening a file %s'%fileName)
-                self.Files += [open(fileName)]
+                self.Files += [open(fileName,'r')]
             else:
                 # TODO: throw a meaningful exception
                 self.Log('ERROR: file %s does not exists'%fileName)
@@ -30,8 +30,12 @@ class FileReader():
     def Read(self):
         """Lazy read method for big files, yields one line at a time"""
         for txtFile in self.Files:
-            for cnt, line in enumerate(txtFile):
-               yield line 
+            try:
+                for cnt, line in enumerate(txtFile):
+                   yield line
+            except UnicodeDecodeError:
+                self.Log('File %s contains non-unicode characters, skipping'%txtFile.name)
+                continue
     def __exit__(self, exc_type, exc_value, traceback):
         """ Method to exit with statement, close all opened files """
         for txtFile in self.Files:

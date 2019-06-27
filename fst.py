@@ -38,11 +38,8 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--together",  
             help="Do not separate results by files", action="store_true")
     args = parser.parse_args()
-    # TODO: move config to a separate file
-    config = {'AnalysisOperator':{}, 
-            'TextUIOperator':{'NEntries':10},
-            'PlotOperator':{'NEntries':10}}
     # Load main operators
+    from config import config
     uiOperator = TextUIOperator(config)
     analysisOperator = AnalysisOperator(config)
     fileNames = GetFileNames(args)

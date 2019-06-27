@@ -12,7 +12,7 @@ Also, one needs to install the following packages: `pandas`, `matplotlib`
 
 # Usage
 
-One can symply run the program via console in any directory:
+One can simply run the program via console in any directory:
 ```
 python3 fst.py
 ```

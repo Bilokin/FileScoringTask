@@ -17,6 +17,11 @@ class TestRegexHelper(unittest.TestCase):
         print(words)
         self.assertEqual(len(words),10)
         self.assertEqual(words[-1],'scrutanda')
+        
+        phrase = ' p_beam      = (0.175903,0,4.49595;11.4946)'
+        words = RegexHelper.GetWords(phrase)
+        print(words)
+        self.assertEqual(len(words),1)
 
 
 if __name__ == '__main__':

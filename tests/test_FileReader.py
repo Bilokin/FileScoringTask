@@ -11,6 +11,7 @@ class TestFileReader(unittest.TestCase):
     """Test case for file reader"""
 
     def test_Read(self):
+        """ Checks the basic functionality """
         counter = 0
         # TODO: relative path is not optimal...
         fileNames = ['tests/examples/lorem.txt',
@@ -19,6 +20,15 @@ class TestFileReader(unittest.TestCase):
             for line in fileReader.Read():
                 counter += 1
         self.assertEqual(counter, 105)
+    def test_ReadLarge(self):
+        """ Checks the performance """
+        # TODO: do the actual check of performance
+        counter = 0
+        fileNames = ['tests/examples/RecoDecays.out']
+        with FileReader(fileNames) as fileReader:
+            for line in fileReader.Read():
+                counter += 1
+        self.assertEqual(counter, 413462)
 
 if __name__ == '__main__':
     unittest.main()

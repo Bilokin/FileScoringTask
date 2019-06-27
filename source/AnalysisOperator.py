@@ -22,10 +22,16 @@ class AnalysisOperator():
 
     def ProduceDataframe(self, generator):
         """ Produces a dataframe object from the generator """
+        general_dict = {}
         for line in generator:
-            wordDF = pd.DataFrame(index =
-                    RegexHelper.GetWords(line)).index.value_counts().to_frame(self.ColName)
-            self.Dataframe = self.Dataframe.add(wordDF,  fill_value = 0)
+            words = RegexHelper.GetWords(line)
+            for word in words:
+                if word in general_dict.keys():
+                    general_dict[word] += 1
+                else:
+                    general_dict[word] = 1
+        self.Dataframe = pd.DataFrame.from_dict(general_dict, 
+                orient='index', columns = [self.ColName])
         self.Dataframe = self.Dataframe.sort_values(by=[self.ColName], 
                 ascending = False)
 

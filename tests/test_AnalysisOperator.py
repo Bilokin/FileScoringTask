@@ -18,10 +18,14 @@ class TestAnalysisOperator(unittest.TestCase):
         analysisOperator = AnalysisOperator({"AnalysisOperator":{}})
         with FileReader(fileNames) as fileReader:
             analysisOperator.ProduceDataframe(fileReader.Read())
-        lines = ['intellegis quanta in dato beneficio sit laus, cum in accepto sit tanta gloria.',
-                'Intellectum est enim mihi quidem in multis, et maxime in me ipso, sed paulo ']
-        #analysisOperator.ProduceDataframe(lines)
-        print(analysisOperator.Dataframe.head)
+        self.assertEqual(analysisOperator.Dataframe.loc['et']['Counts'],37)
+        self.assertEqual(analysisOperator.Dataframe.loc['in']['Counts'],26)
+        self.assertEqual(analysisOperator.Dataframe.loc['ut']['Counts'],13)
+        self.assertEqual(analysisOperator.Dataframe.loc['the']['Counts'],12)
+        self.assertEqual(analysisOperator.Dataframe.loc['est']['Counts'],10)
+        self.assertEqual(analysisOperator.Dataframe.loc['ad']['Counts'],10)
+        self.assertEqual(analysisOperator.Dataframe.loc['enim']['Counts'],9)
+        
 
 if __name__ == '__main__':
     unittest.main()

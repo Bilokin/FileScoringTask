@@ -17,6 +17,7 @@ def GetFileNames(args):
     if (args.filename):
         return [args.filename]
     if (args.directoryname):
+        # TODO: This is not optimal
         fileNames = glob.glob(args.directoryname+'/*')
         # TODO: filter away non-text files
         return fileNames

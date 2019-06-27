@@ -13,7 +13,13 @@ from TextUIOperator import TextUIOperator
 from PlotOperator import PlotOperator
 
 def GetFileNames(args):
-    """ Function, which selects the file names """
+    """ 
+    Function, which selects the file names 
+    Args:
+        args (obj): Arguments of argparse 
+    Returns: 
+        (bool) list of the filenames
+    """
     if (args.filename):
         return [args.filename]
     if (args.directoryname):
@@ -28,7 +34,8 @@ def GetFileNames(args):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Program to count the most frequent words '
+        'in a file or directory. It is able to plot the histograms or print them to console.')
     parser.add_argument("-f", "--filename",  
             help="Path to file for the analysis", action="store")
     parser.add_argument("-d", "--directoryname",  

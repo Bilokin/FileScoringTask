@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
 
 class PlotOperator():
@@ -5,7 +7,15 @@ class PlotOperator():
     Class, which plots the plots
     """
     def __init__(self, config, log = True):
-        """ Constructor method """
+        """ 
+        Constructor method 
+        Args:
+            configi (dict): Configuration dictionary, 
+                it has to contain a key named after
+                this operator
+            log (bool): switch to disable logs
+        Returns: 
+        """
         #: bool to enable logs
         self.enableLogging = log
         #: name of the class 
@@ -15,7 +25,11 @@ class PlotOperator():
         self.Introduce()
 
     def Plot(self, df):
-        """ Plots a dataframe """
+        """ 
+        Plots a dataframe 
+        Args:
+            df (pandas.DataFrame): Data to plot
+        """
         if (len(df) < 1):
             # TODO: print a meaningful message
             return
@@ -33,7 +47,11 @@ class PlotOperator():
         plt.show()
 
     def Log(self, string):
-        """ Log method, prints a preformatted message. """
+        """ 
+        Log method, prints a preformatted message. 
+        Args:
+            string (str): String to print
+        """
         if self.enableLogging:
             print(self.OperatorName+": "+string)
 

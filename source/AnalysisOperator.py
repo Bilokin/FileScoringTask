@@ -42,7 +42,7 @@ class AnalysisOperator():
         for line in generator:
             words = RegexHelper.GetWords(line)
             for word in words:
-                if word in general_dict.keys():
+                if word in general_dict:
                     general_dict[word] += 1
                 else:
                     general_dict[word] = 1

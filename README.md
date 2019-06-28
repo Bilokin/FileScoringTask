@@ -17,7 +17,12 @@ One can simply run the program via console in any directory:
 python3 fst.py
 ```
 and it will output 10 most frequent words found in all files of the current directory. 
-Further instructions and help is provided by the usual help command:
+The results can be plotted by supplying `-p` argument, for example:
+```
+python3 fst.py -f path/to/file -p
+```
+The program settings can be modified by editing `config.py` file.
+Further instructions and help is provided by the usual command:
 ```
 python3 fst.py --help
 ```

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+from collections import defaultdict
 import pandas as pd
 import RegexHelper
 class AnalysisOperator():
@@ -38,14 +39,11 @@ class AnalysisOperator():
         Returns:
             df (pandas.DataFrame): Sorted DataFrame of counts
         """
-        general_dict = {}
+        general_dict = defaultdict(int)
         for line in generator:
             words = RegexHelper.GetWords(line)
             for word in words:
-                if word in general_dict:
-                    general_dict[word] += 1
-                else:
-                    general_dict[word] = 1
+                general_dict[word] += 1
         df = pd.DataFrame.from_dict(general_dict, 
                 orient='index', columns = [self.ColName])
         df = df.sort_values(by=[self.ColName], 

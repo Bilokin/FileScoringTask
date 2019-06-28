@@ -10,11 +10,8 @@ def GetWords(phrase):
     Returns: 
         filteredList (list): list of words
     """
-    regex = re.compile(r'\w+',re.UNICODE)
-    listToFilter = re.findall(regex,phrase.lower())
-    filteredList = []
-    #Remove numbers
-    for word in listToFilter:
-        if re.match("^\d+$", word) is None:
-            filteredList += [word]
-    return filteredList
+    # Remove special characters regex
+    # It works faster than the standard \w+ pattern
+    regex = re.compile(r'([^\d\`\~\!\@\#\$\%\^\&\*\(\)\+\=\[\{\]\}\|\\\'\<\,\.\>\?\/\""\;\:\s]+)+',
+            re.UNICODE)
+    return re.findall(regex,phrase.lower())

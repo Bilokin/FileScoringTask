@@ -10,7 +10,7 @@ def GetWords(phrase):
     Returns: 
         filteredList (list): list of words
     """
-    regex = r'\w+'
+    regex = re.compile(r'\w+',re.UNICODE)
     listToFilter = re.findall(regex,phrase.lower())
     filteredList = []
     #Remove numbers
